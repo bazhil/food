@@ -12,4 +12,3 @@ class FoodAPIList(generics.ListCreateAPIView):
         Prefetch('food', queryset=Food.objects.filter(is_publish=True))).order_by('id')
 
     serializer_class = FoodListSerializer
-
