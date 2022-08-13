@@ -8,9 +8,8 @@ from django.db.models import Prefetch
 
 # Create your views here.
 class FoodAPIList(generics.ListCreateAPIView):
-    food_queryset = Food.objects.filter(is_publish=True)
-    queryset = FoodCategory.objects.filter(food__is_publish=True).prefetch_related(
-        Prefetch('food', queryset=food_queryset)).order_by('id')
+    queryset = FoodCategory.objects.filter().prefetch_related(
+        Prefetch('food', queryset=Food.objects.filter(is_publish=True))).order_by('id')
 
     serializer_class = FoodListSerializer
 
